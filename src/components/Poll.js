@@ -28,7 +28,7 @@ class Poll extends Component {
             )
         }
 
-        const { authorAvatar, poll, vote, users } = this.props;
+        const { authorAvatar, poll, vote } = this.props;
 
         const totalVotes = getVoteKeys().reduce((total, key) => total + poll[key].length, 0);
 
