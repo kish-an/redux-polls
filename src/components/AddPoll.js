@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleAddPoll } from '../actions/polls';
+import { Redirect } from 'react-router-dom';
 
 class AddPoll extends Component {
     state = {
@@ -19,6 +20,8 @@ class AddPoll extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
+
+        this.props.history.push('/');
 
         this.props.dispatch(handleAddPoll(this.state));
     }
