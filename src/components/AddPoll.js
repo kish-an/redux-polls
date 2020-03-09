@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleAddPoll } from '../actions/polls';
-import { Redirect } from 'react-router-dom';
 
 class AddPoll extends Component {
     state = {
