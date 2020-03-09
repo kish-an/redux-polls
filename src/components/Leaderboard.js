@@ -31,7 +31,7 @@ function mapStateToProps({ users }) {
                 answers: answers.length,
             }
         })
-        .sort((a, b) => (b.polls + b.answers) > (a.polls + a.answers));
+        .sort((a, b) => (b.polls + b.answers) - (a.polls + a.answers));
 
     return {
         users: usersInfo,
