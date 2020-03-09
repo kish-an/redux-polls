@@ -1,4 +1,5 @@
 import { RECEIVE_DATA } from '../actions/shared';
+import { ADD_POLL } from '../actions/polls';
 
 function polls(state = {}, action) {
     switch(action.type) {
@@ -7,6 +8,11 @@ function polls(state = {}, action) {
                 ...state,
                 ...action.polls,
             };
+        case ADD_POLL:
+            return {
+                ...state,
+                [action.poll.id]: action.poll,
+            }
         default:
             return state;
     }
