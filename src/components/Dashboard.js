@@ -1,55 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class Dashboard extends Component {
-    state = {
-        showAnswered: false,
-    }
+const Dashboard = () => {
+    const [showAnswered, setShowAnswered] = useState(false);
+    const { answered, unanswered } = useSelector(mapStateToProps);
 
-    showUnansweredPolls = () => {
-        this.setState({ showAnswered: false });
-    }
+    const showAnsweredPolls = () => setShowAnswered(true);
 
-    showAnsweredPolls = () => {
-        this.setState({ showAnswered: true });
-    }
+    const showUnansweredPolls = () => setShowAnswered(false);
 
-    render() {
-        const { showAnswered } = this.state;
-        const { answered, unanswered } = this.props;
-
-        const list = showAnswered ? answered : unanswered;
-
-        return (
-            <div>
-                <div className='dashboard-toggle'>
-                    <button
-                        style={{textDecoration: !showAnswered ? 'underline' : null}}
-                        onClick={this.showUnansweredPolls}
-                    >
-                        Unanswered
+    const list = showAnswered ? answered : unanswered;
+    return (
+        <div>
+            <div className='dashboard-toggle'>
+                <button
+                    style={{ textDecoration: !showAnswered ? 'underline' : null }}
+                    onClick={showUnansweredPolls}
+                >
+                    Unanswered
                     </button>
-                    <span> | </span>
-                    <button
-                        style={{textDecoration: showAnswered ? 'underline' : null}}
-                        onClick={this.showAnsweredPolls}
-                    >
-                        Answered
+                <span> | </span>
+                <button
+                    style={{ textDecoration: showAnswered ? 'underline' : null }}
+                    onClick={showAnsweredPolls}
+                >
+                    Answered
                     </button>
-                </div>
-                <ul className='dashboard-list'>
-                    {list.map(poll => (
-                        <li key={poll.id}>
-                            <Link to={`polls/${poll.id}`}>
-                                {poll.question}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
             </div>
-        )
-    }
+            <ul className='dashboard-list'>
+                {list.map(poll => (
+                    <li key={poll.id}>
+                        <Link to={`polls/${poll.id}`}>
+                            {poll.question}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
 }
 
 function mapStateToProps({ authedUser, users, polls }) {
@@ -68,4 +57,4 @@ function mapStateToProps({ authedUser, users, polls }) {
     }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;
