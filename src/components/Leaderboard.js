@@ -1,7 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function Leaderboard({ users }) {
+const Leaderboard = () => {
+    const users = useSelector(mapStateToProps);
+
     return (
         <ul>
             {users.map(user => (
@@ -33,9 +35,7 @@ function mapStateToProps({ users }) {
         })
         .sort((a, b) => (b.polls + b.answers) - (a.polls + a.answers));
 
-    return {
-        users: usersInfo,
-    }
+    return usersInfo;
 }
 
-export default connect(mapStateToProps)(Leaderboard);
+export default Leaderboard;
